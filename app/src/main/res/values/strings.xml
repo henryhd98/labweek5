@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Two beer, or not two beer... Shakesbeer</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="percentage">Alcohol [%]</string>
+    <string name="price">Price [€]</string>
+    <string name="find_price_below">Find price below €:</string>
+    <string name="find_alcohol_above">Find percentage above %:</string>
+    <string name="go">Go</string>
+    <string name="and">AND</string>
+    <string name="cost_str_1"> with </string>
+    <string name="cost_str_2">% costs €</string>
+
+</resources>

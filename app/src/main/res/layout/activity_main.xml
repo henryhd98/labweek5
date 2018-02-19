@@ -1,0 +1,134 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <Spinner
+        android:id="@+id/beerspinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <RelativeLayout
+        android:id="@+id/pricecontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beerspinner">
+	    
+	    <TextView
+	        android:id="@+id/priceHeading"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:text="@string/price" 
+	        android:textAppearance="?android:attr/textAppearanceSmall"/>
+	    
+        
+	    <TextView
+	        android:id="@+id/price"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_below="@+id/priceHeading"/>
+
+    
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/percentagecontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pricecontainer"
+	    android:layout_toRightOf="@+id/pricecontainer"
+	    android:layout_marginLeft="20dp">
+	    
+	    <TextView
+	        android:id="@+id/percentageHeading"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:text="@string/percentage" 
+	        android:textAppearance="?android:attr/textAppearanceSmall"/>
+	    
+        
+	    <TextView
+	        android:id="@+id/percentage"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_below="@+id/percentageHeading"/>
+    
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/dbcontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true" />
+
+
+
+
+    <LinearLayout
+        android:id="@+id/findpricecontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/pricecontainer" >
+
+        <TextView
+            android:id="@+id/findpricebelowtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_price_below" />
+
+        <EditText
+            android:id="@+id/chosenPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/findPriceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go" />
+
+	</LinearLayout>
+	
+    <LinearLayout
+        android:id="@+id/findpercentagecontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/findpricecontainer" >
+
+        <TextView
+            android:id="@+id/findalcoholabovetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_alcohol_above" />
+
+        <EditText
+            android:id="@+id/chosenPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/findAlcoholButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go" />
+        </LinearLayout>
+
+
+    
+ 
+</RelativeLayout>
