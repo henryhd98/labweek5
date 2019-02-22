@@ -102,12 +102,12 @@ public class BelgianBeersDB {
     /************************
      * User specific database queries
      *******************************************/
-   
-  /*
-   * Obtain all database entries and return as human readable content in a String array
-   * A query with all fields set to null will result in the whole database being returned
-   * The following SQL query is implemented: SELECT * FROM  Beers
-   */
+
+    /*
+     * Obtain all database entries and return as human readable content in a String array
+     * A query with all fields set to null will result in the whole database being returned
+     * The following SQL query is implemented: SELECT * FROM  Beers
+     */
     public String[] getAll() {
 
         ArrayList<String> outputArray = new ArrayList<String>();
@@ -135,7 +135,7 @@ public class BelgianBeersDB {
             alcoholPercentage = cursor.getFloat(cursor.getColumnIndex(KEY_ALCOHOL_PERCENTAGE));
             price = cursor.getFloat(cursor.getColumnIndex(KEY_PRICE));
 
-            outputArray.add(beerName + " "+context.getString(R.string.cost_str_1) + " "+ alcoholPercentage + context.getString(R.string.cost_str_2) + price);
+            outputArray.add(beerName + " " + context.getString(R.string.cost_str_1) + " " + alcoholPercentage + context.getString(R.string.cost_str_2) + price);
             result = cursor.moveToNext();
 
         }
@@ -173,17 +173,17 @@ public class BelgianBeersDB {
             alcoholPercentage = cursor.getFloat(cursor.getColumnIndex(KEY_ALCOHOL_PERCENTAGE));
             price = cursor.getFloat(cursor.getColumnIndex(KEY_PRICE));
 
-            outputArray.add(beerName + " "+context.getString(R.string.cost_str_1) + " "+ alcoholPercentage + context.getString(R.string.cost_str_2) + price);
+            outputArray.add(beerName + " " + context.getString(R.string.cost_str_1) + " " + alcoholPercentage + context.getString(R.string.cost_str_2) + price);
             result = cursor.moveToNext();
         }
         return outputArray.toArray(new String[outputArray.size()]);
     }
- 
-   
-  /*
-   * Obtain all database entries with an alcohol percentage higher than minPercentage and return as human readable content in a String array
-   * The following SQL query is implemented: SELECT * FROM Beers WHERE alcohol_percentage > minPercentage
-   */
+
+
+    /*
+     * Obtain all database entries with an alcohol percentage higher than minPercentage and return as human readable content in a String array
+     * The following SQL query is implemented: SELECT * FROM Beers WHERE alcohol_percentage > minPercentage
+     */
 
 
     public String[] getAllStrongerThan(Float minPercentage) {
@@ -259,27 +259,25 @@ public class BelgianBeersDB {
                 KEY_ID, KEY_PRICE};
 
 
-        String where = KEY_PRICE + "= ?";
+        String where = KEY_BEER_NAME + "= ?";
         String whereArgs[] = {beerName};
         String groupBy = null;
         String having = null;
         String order = null;
 
         SQLiteDatabase db = moduleDBOpenHelper.getWritableDatabase();
-        Cursor cursor = db.query(ModuleDBOpenHelper.DATABASE_TABLE,
-                result_columns, where,
-                whereArgs, groupBy, having, order);
+        Cursor cursor = db.query(ModuleDBOpenHelper.DATABASE_TABLE, result_columns, where, whereArgs, groupBy, having, order);
         if (cursor.moveToFirst()) {
-            int columnPrice  = cursor.getColumnIndex(KEY_PRICE);
-            return cursor.getFloat(columnPrice);
-        } else return 0;
+            int columnAlcoholPrice = cursor.getColumnIndex(KEY_PRICE);
+            return cursor.getFloat(columnAlcoholPrice);
+        }
 
-
-
-
+        else return 0;
         // return 0 provided to prevent errors. Remove when implementing real functionality
 
     }
+
+
 
     /*
      * This is a helper class that takes a lot of the hassle out of using databases. Use as is and complete the following as required:
@@ -329,7 +327,7 @@ public class BelgianBeersDB {
             // comparing oldVersion and newVersion values.
 
             // The simplest case is to drop the old table and create a new one.
-            db.execSQL("DROP TABLE IF IT EXISTS " + DATABASE_TABLE);
+        //***    db.execSQL("DROP TABLE IF IT EXISTS " + DATABASE_TABLE);
             // Create a new one.
             onCreate(db);
         }
