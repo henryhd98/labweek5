@@ -254,8 +254,31 @@ public class BelgianBeersDB {
      * SELECT _id, price FROM Beers WHERE beer_name = beerName
      */
     public float getPrice(String beerName) {
+
+        String[] result_columns = new String[]{
+                KEY_ID, KEY_PRICE};
+
+
+        String where = KEY_PRICE + "= ?";
+        String whereArgs[] = {beerName};
+        String groupBy = null;
+        String having = null;
+        String order = null;
+
+        SQLiteDatabase db = moduleDBOpenHelper.getWritableDatabase();
+        Cursor cursor = db.query(ModuleDBOpenHelper.DATABASE_TABLE,
+                result_columns, where,
+                whereArgs, groupBy, having, order);
+        if (cursor.moveToFirst()) {
+            int columnPrice  = cursor.getColumnIndex(KEY_PRICE);
+            return cursor.getFloat(columnPrice);
+        } else return 0;
+
+
+
+
         // return 0 provided to prevent errors. Remove when implementing real functionality
-        return 0;
+
     }
 
     /*
