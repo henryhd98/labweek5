@@ -187,8 +187,35 @@ public class BelgianBeersDB {
 
 
     public String[] getAllStrongerThan(Float minPercentage) {
-        // return null provided to prevent errors. Remove when implementing real functionality
-        return null;
+        ArrayList<String> outputArray = new ArrayList<String>();
+        String[] result_columns = new String[]{
+                KEY_BEER_NAME, KEY_ALCOHOL_PERCENTAGE, KEY_PRICE};
+
+        String beerName;
+        float alcoholPercentage;
+        float price;
+
+        String where = KEY_ALCOHOL_PERCENTAGE +"> ?";
+        String whereArgs[] = {minPercentage.toString()};
+        String groupBy = null;
+        String having = null;
+        String order = null;
+
+        SQLiteDatabase db = moduleDBOpenHelper.getWritableDatabase();
+        Cursor cursor = db.query(ModuleDBOpenHelper.DATABASE_TABLE,
+                result_columns, where,
+                whereArgs, groupBy, having, order);
+        //
+        boolean result = cursor.moveToFirst();
+        while (result) {
+            beerName = cursor.getString(cursor.getColumnIndex(KEY_BEER_NAME));
+            alcoholPercentage = cursor.getFloat(cursor.getColumnIndex(KEY_ALCOHOL_PERCENTAGE));
+            price = cursor.getFloat(cursor.getColumnIndex(KEY_PRICE));
+
+            outputArray.add(beerName + " " + context.getString(R.string.cost_str_1) + " " + alcoholPercentage + context.getString(R.string.cost_str_2) + price);
+            result = cursor.moveToNext();
+        }
+        return outputArray.toArray(new String[outputArray.size()]);
     }
 
 
@@ -274,6 +301,7 @@ public class BelgianBeersDB {
 
         else return 0;
         // return 0 provided to prevent errors. Remove when implementing real functionality
+
 
     }
 
