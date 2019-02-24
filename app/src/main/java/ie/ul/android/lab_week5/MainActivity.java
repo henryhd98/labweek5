@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
 		filterPricesButton = (Button) findViewById(R.id.findPriceButton);
 		priceField = (EditText) findViewById(R.id.chosenPrice);
 		alcoholField = (EditText) findViewById(R.id.chosenPercentage);
+		filterAlcoholButton =(Button) findViewById(R.id.findAlcoholButton);
 		
 		beerDB = new BelgianBeersDB(getApplicationContext());
 		showFullDatabase();
@@ -81,7 +82,18 @@ public class MainActivity extends Activity {
 			}
         	
         });
-    
+
+		filterAlcoholButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (isPercentageSet()){
+					showAllStrongerThan(Float.parseFloat(alcoholField.getText().toString()));
+				}
+
+			}
+
+		});
 
 	}
 
