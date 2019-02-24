@@ -26,6 +26,7 @@ public class BelgianBeersDB {
             "alcohol_percentage";
     public static final String KEY_PRICE =
             "price";
+    public static final String KEY_VOLUME= "volume";
 
     private Context context;
 
@@ -42,17 +43,17 @@ public class BelgianBeersDB {
 
         // populate the database with some data in case it is empty
         if (getAll().length == 0) {
-            this.addRow("La Chouffe", 6.0f, 2.3f);
-            this.addRow("La Trappe", 5.0f, 2.4f);
-            this.addRow("Delirium Tremens", 9.0f, 3.5f);
-            this.addRow("Duvel", 6.3f, 2.6f);
-            this.addRow("Rochefort Nr10", 7.1f, 3.4f);
-            this.addRow("Rochefort Nr12", 8.1f, 5.0f);
-            this.addRow("Affligem", 4.5f, 1.2f);
-            this.addRow("Kriek", 3.5f, 1.39f);
-            this.addRow("Bush Beer", 13f, 5.3f);
-            this.addRow("Mort Subite", 6.0f, 2.3f);
-            this.addRow("Agnus Dei", 4.3f, 3.56f);
+            this.addRow("La Chouffe", 6.0f, 100,2.3f);
+            this.addRow("La Trappe", 5.0f, 200,2.4f);
+            this.addRow("Delirium Tremens", 9.0f, 300,3.5f);
+            this.addRow("Duvel", 6.3f, 400,2.6f);
+            this.addRow("Rochefort Nr10", 7.1f, 500,3.4f);
+            this.addRow("Rochefort Nr12", 8.1f, 150,5.0f);
+            this.addRow("Affligem", 4.5f, 250,1.2f);
+            this.addRow("Kriek", 3.5f, 350,1.39f);
+            this.addRow("Bush Beer", 13f,450 ,5.3f);
+            this.addRow("Mort Subite", 6.0f, 550,2.3f);
+            this.addRow("Agnus Dei", 4.3f,330, 3.56f);
         }
     }
 
@@ -65,7 +66,7 @@ public class BelgianBeersDB {
         moduleDBOpenHelper.close();
     }
 
-    public void addRow(String beerName, float alcoholPercentage, float price) {
+    public void addRow(String beerName, float alcoholPercentage,int volume1, float price) {
         // Create a new row of values to insert.
         ContentValues newValues = new ContentValues();
 
@@ -73,6 +74,7 @@ public class BelgianBeersDB {
         newValues.put(KEY_BEER_NAME, beerName);
         newValues.put(KEY_ALCOHOL_PERCENTAGE, alcoholPercentage);
         newValues.put(KEY_PRICE, price);
+        newValues.put(KEY_VOLUME, volume1);
 
         // Insert the row into your table
         SQLiteDatabase db = moduleDBOpenHelper.getWritableDatabase();
@@ -112,12 +114,12 @@ public class BelgianBeersDB {
 
         ArrayList<String> outputArray = new ArrayList<String>();
         String[] result_columns = new String[]{
-                KEY_BEER_NAME, KEY_ALCOHOL_PERCENTAGE, KEY_PRICE};
+                KEY_BEER_NAME, KEY_ALCOHOL_PERCENTAGE, KEY_PRICE, KEY_VOLUME};
 
         String beerName;
         float alcoholPercentage;
         float price;
-
+        int volume1;
         String where = null;
         String whereArgs[] = null;
         String groupBy = null;
@@ -134,8 +136,9 @@ public class BelgianBeersDB {
             beerName = cursor.getString(cursor.getColumnIndex(KEY_BEER_NAME));
             alcoholPercentage = cursor.getFloat(cursor.getColumnIndex(KEY_ALCOHOL_PERCENTAGE));
             price = cursor.getFloat(cursor.getColumnIndex(KEY_PRICE));
+            volume1 =cursor.getInt(cursor.getColumnIndex(KEY_VOLUME));
 
-            outputArray.add(beerName + " " + context.getString(R.string.cost_str_1) + " " + alcoholPercentage + context.getString(R.string.cost_str_2) + price);
+            outputArray.add(beerName + " " + context.getString(R.string.cost_str_1) + " " + alcoholPercentage + context.getString(R.string.cost_str_2) + price + " "+ volume1);
             result = cursor.moveToNext();
 
         }
